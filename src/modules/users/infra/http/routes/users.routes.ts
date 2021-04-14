@@ -7,5 +7,6 @@ const usersController = new UsersController();
 const usersRouter = Router();
 
 usersRouter.post('/', usersController.create);
+usersRouter.get('/:id', usersController.show);
 
 export { usersRouter };

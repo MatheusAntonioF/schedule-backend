@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import { CreateUsersUseCase } from '@modules/users/useCases/createUsers/CreateUsersUseCase';
+import { ShowUserUseCase } from '@modules/users/useCases/showUser/ShowUserUseCase';
 
 class UsersController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -12,6 +13,14 @@ class UsersController {
       .execute({ name, email, password });
 
     return response.status(201).json(createdUser);
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const { id: user_id } = request.params;
+
+    const foundUser = await container.resolve(ShowUserUseCase).execute(user_id);
+
+    return response.status(200).json(foundUser);
   }
 }
 
