@@ -15,8 +15,6 @@ class UsersRepository implements IUsersRepository {
   async create({ name, email, password }: IUserCreate): Promise<User> {
     const userToSave = this.usersRepository.create({ name, email, password });
 
-    console.log(userToSave);
-
     await this.usersRepository.save(userToSave);
 
     return userToSave;
@@ -32,6 +30,12 @@ class UsersRepository implements IUsersRepository {
     const foundUser = await this.usersRepository.findOne(id);
 
     return foundUser;
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const deletedUser = await this.usersRepository.delete({ id });
+
+    return !!deletedUser;
   }
 }
 

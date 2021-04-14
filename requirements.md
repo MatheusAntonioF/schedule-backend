@@ -4,12 +4,10 @@
 
 ### Functional requirements
 
-- [ ] It should be able to register an user
+- [x] It should be able to register an user
+- [x] It should be able to show a user
 - [ ] It should be able to sign in an user
-- [ ] It should be able to update an user
-- [ ] It should not be able to update an user when this isn't logged
-- [ ] It should be able to delete a user
-- [ ] It should not be able to delete an user when this isn't logged
+- [x] It should be able to delete a user
 
 ### Non functional requirements
 
