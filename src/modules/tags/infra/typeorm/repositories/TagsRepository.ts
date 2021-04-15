@@ -18,6 +18,12 @@ class TagsRepository implements ITagsRepository {
     return foundTag;
   }
 
+  async findAll(): Promise<Tag[]> {
+    const allTags = await this.tagsRepository.find();
+
+    return allTags;
+  }
+
   async findById(id: string): Promise<Tag> {
     const foundTag = await this.tagsRepository.findOne({ where: { id } });
 

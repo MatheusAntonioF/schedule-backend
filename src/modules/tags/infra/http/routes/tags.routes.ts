@@ -11,6 +11,7 @@ const tagsController = new TagsController();
 tagsRouter.use(ensureAuthenticate);
 
 tagsRouter.post('/', tagsController.create);
+tagsRouter.get('/', tagsController.list);
 tagsRouter.delete('/:id', tagsController.delete);
 
 export { tagsRouter };

@@ -3,8 +3,15 @@ import { container } from 'tsyringe';
 
 import { CreateTagsUseCase } from '@modules/tags/useCases/createTag/CreateTagUseCase';
 import { DeleteTagUseCase } from '@modules/tags/useCases/deleteTag/DeleteTagUseCase';
+import { ListTagsUseCase } from '@modules/tags/useCases/listTags/ListTagsUseCase';
 
 class TagsController {
+  async list(request: Request, response: Response): Promise<Response> {
+    const allTags = await container.resolve(ListTagsUseCase).execute();
+
+    return response.status(200).json(allTags);
+  }
+
   async create(request: Request, response: Response): Promise<Response> {
     const { name, colorHex } = request.body;
 
