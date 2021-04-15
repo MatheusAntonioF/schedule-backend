@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { ITagCreate } from '@modules/tags/infra/dtos/ITagCreate';
+import { ITagCreate } from '@modules/tags/dtos/ITagCreate';
 import { Tag } from '@modules/tags/infra/typeorm/entities/Tag';
 import { ITagsRepository } from '@modules/tags/interfaces/ITagsRepository';
 import { AppError } from '@shared/errors/AppError';

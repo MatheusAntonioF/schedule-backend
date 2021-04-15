@@ -33,7 +33,6 @@
 ### Functional requirements
 
 - [x] It should be able to create a new tag
-- [ ] It should be able to update a tag
 - [ ] It should be able to delete a tag
 
 ## Boot
