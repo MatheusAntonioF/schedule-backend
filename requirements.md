@@ -22,6 +22,7 @@
 - [x] It should not be able to create a new event in the same time with another event
 - [ ] It should be able to update an event
 - [x] It should be able to delete an event
+- [x] It should be able to show a event
 - [x] It should be able to list event from an user
 
 ### Non functional requirements

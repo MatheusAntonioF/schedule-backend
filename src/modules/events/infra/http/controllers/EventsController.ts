@@ -4,8 +4,19 @@ import { container } from 'tsyringe';
 import { CreateEventUseCase } from '@modules/events/useCases/createEvent/CreateEventUseCase';
 import { DeleteEventUseCase } from '@modules/events/useCases/deleteEvent/DeleteEventUseCase';
 import { ListEventsUseCase } from '@modules/events/useCases/listEvents/ListEventsUseCase';
+import { ShowEventUseCase } from '@modules/events/useCases/showEvent/ShowEventUseCase';
 
 class EventsController {
+  async show(request: Request, response: Response): Promise<Response> {
+    const { id: event_id } = request.params;
+
+    const foundEvent = await container
+      .resolve(ShowEventUseCase)
+      .execute(event_id);
+
+    return response.status(200).json(foundEvent);
+  }
+
   async list(request: Request, response: Response): Promise<Response> {
     const { id: user_id } = request.user;
 
