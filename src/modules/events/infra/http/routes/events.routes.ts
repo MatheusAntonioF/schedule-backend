@@ -12,5 +12,6 @@ eventRouter.use(ensureAuthenticate);
 
 eventRouter.post('/', eventsController.create);
 eventRouter.get('/', eventsController.list);
+eventRouter.delete('/:id', eventsController.delete);
 
 export { eventRouter };

@@ -12,6 +12,13 @@ class EventsRepository implements IEventsRepository {
   constructor() {
     this.eventsRepository = getRepository(Event);
   }
+
+  async findById(event_id: string): Promise<Event> {
+    const foundEvent = await this.eventsRepository.findOne(event_id);
+
+    return foundEvent;
+  }
+
   async findAll(user_id: string): Promise<Event[]> {
     const allEvents = await this.eventsRepository.find({ where: { user_id } });
 
@@ -25,6 +32,7 @@ class EventsRepository implements IEventsRepository {
 
     return foundEvent;
   }
+
   async create({
     name,
     description,
@@ -41,6 +49,12 @@ class EventsRepository implements IEventsRepository {
     await this.eventsRepository.save(eventToSave);
 
     return eventToSave;
+  }
+
+  async delete(event_id: string): Promise<boolean> {
+    const deletedEvent = await this.eventsRepository.delete(event_id);
+
+    return !!deletedEvent;
   }
 }
 

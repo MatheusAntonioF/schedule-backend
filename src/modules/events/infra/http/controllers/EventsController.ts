@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import { CreateEventUseCase } from '@modules/events/useCases/createEvent/CreateEventUseCase';
+import { DeleteEventUseCase } from '@modules/events/useCases/deleteEvent/DeleteEventUseCase';
 import { ListEventsUseCase } from '@modules/events/useCases/listEvents/ListEventsUseCase';
 
 class EventsController {
@@ -25,6 +26,14 @@ class EventsController {
       .execute({ name, description, date, user_id });
 
     return response.status(201).json(createdEvent);
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { id: event_id } = request.params;
+
+    await container.resolve(DeleteEventUseCase).execute(event_id);
+
+    return response.status(204).send();
   }
 }
 
