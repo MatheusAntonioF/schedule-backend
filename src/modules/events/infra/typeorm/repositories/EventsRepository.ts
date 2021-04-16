@@ -38,12 +38,14 @@ class EventsRepository implements IEventsRepository {
     description,
     date,
     user_id,
+    tags,
   }: IEventCreate): Promise<Event> {
     const eventToSave = this.eventsRepository.create({
       name,
       description,
       date,
       user_id,
+      tags,
     });
 
     await this.eventsRepository.save(eventToSave);

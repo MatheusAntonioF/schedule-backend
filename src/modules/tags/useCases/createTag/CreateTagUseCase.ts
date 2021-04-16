@@ -11,12 +11,16 @@ class CreateTagsUseCase {
     @inject('TagsRepository') private tagsRepository: ITagsRepository
   ) {}
 
-  async execute({ name, colorHex }: ITagCreate): Promise<Tag> {
-    const tagAlredyExists = await this.tagsRepository.findByName(name);
+  async execute({ name, colorHex, user_id }: ITagCreate): Promise<Tag> {
+    const tagAlredyExists = await this.tagsRepository.findByName(user_id, name);
 
     if (tagAlredyExists) throw new AppError('This tag already exists');
 
-    const createdTag = await this.tagsRepository.create({ name, colorHex });
+    const createdTag = await this.tagsRepository.create({
+      name,
+      colorHex,
+      user_id,
+    });
 
     return createdTag;
   }

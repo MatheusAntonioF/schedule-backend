@@ -7,7 +7,9 @@ import { ListTagsUseCase } from '@modules/tags/useCases/listTags/ListTagsUseCase
 
 class TagsController {
   async list(request: Request, response: Response): Promise<Response> {
-    const allTags = await container.resolve(ListTagsUseCase).execute();
+    const { id: user_id } = request.user;
+
+    const allTags = await container.resolve(ListTagsUseCase).execute(user_id);
 
     return response.status(200).json(allTags);
   }
@@ -15,9 +17,11 @@ class TagsController {
   async create(request: Request, response: Response): Promise<Response> {
     const { name, colorHex } = request.body;
 
+    const { id: user_id } = request.user;
+
     const createdTag = await container
       .resolve(CreateTagsUseCase)
-      .execute({ name, colorHex });
+      .execute({ name, colorHex, user_id });
 
     return response.status(201).json(createdTag);
   }

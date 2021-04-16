@@ -9,8 +9,8 @@ class ListTagsUseCase {
     @inject('TagsRepository') private tagsRepository: ITagsRepository
   ) {}
 
-  async execute(): Promise<Tag[]> {
-    const allTags = await this.tagsRepository.findAll();
+  async execute(user_id: string): Promise<Tag[]> {
+    const allTags = await this.tagsRepository.findAll(user_id);
 
     return allTags;
   }
