@@ -29,13 +29,13 @@ class EventsController {
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const { name, description, date } = request.body;
+    const { name, description, date, tags_name } = request.body;
 
     const { id: user_id } = request.user;
 
     const createdEvent = await container
       .resolve(CreateEventUseCase)
-      .execute({ name, description, date, user_id });
+      .execute({ name, description, date, user_id, tags_name });
 
     return response.status(201).json(createdEvent);
   }

@@ -2,9 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { Event } from '@modules/events/infra/typeorm/entities/Event';
+import { User } from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('tags')
 class Tag {
@@ -16,6 +22,16 @@ class Tag {
 
   @Column()
   colorHex: string;
+
+  @ManyToMany(() => Event, event => event.tags)
+  events: Event[];
+
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User, user => user.id)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @CreateDateColumn()
   created_at: Date;

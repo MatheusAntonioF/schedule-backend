@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Repository } from 'typeorm';
 
 import { ITagsRepository } from '@modules/tags/interfaces/ITagsRepository';
 
@@ -10,6 +10,16 @@ class TagsRepository implements ITagsRepository {
 
   constructor() {
     this.tagsRepository = getRepository(Tag);
+  }
+  async findByNames(user_id: string, tags_names: string[]): Promise<Tag[]> {
+    const foundTags = await this.tagsRepository.find({
+      where: {
+        name: In(tags_names),
+        user_id,
+      },
+    });
+
+    return foundTags;
   }
 
   async findByName(name: string): Promise<Tag> {
@@ -30,8 +40,8 @@ class TagsRepository implements ITagsRepository {
     return foundTag;
   }
 
-  async create({ name, colorHex }: ITagCreate): Promise<Tag> {
-    const tagToSave = this.tagsRepository.create({ name, colorHex });
+  async create({ name, colorHex, user_id }: ITagCreate): Promise<Tag> {
+    const tagToSave = this.tagsRepository.create({ name, colorHex, user_id });
 
     await this.tagsRepository.save(tagToSave);
 
