@@ -18,7 +18,7 @@
 
 ### Functional requirements
 
-- [ ] It should be able to create an event
+- [x] It should be able to create an event
 - [ ] It should be able to update an event
 - [ ] It should be able to delete an event
 - [ ] It should be able to list event from an user
@@ -33,7 +33,8 @@
 ### Functional requirements
 
 - [x] It should be able to create a new tag
-- [ ] It should be able to delete a tag
+- [x] It should be able to delete a tag
+- [x] It should be able to list tags
 
 ## Boot
 
