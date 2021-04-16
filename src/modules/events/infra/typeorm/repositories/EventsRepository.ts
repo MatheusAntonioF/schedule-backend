@@ -12,6 +12,12 @@ class EventsRepository implements IEventsRepository {
   constructor() {
     this.eventsRepository = getRepository(Event);
   }
+  async findAll(user_id: string): Promise<Event[]> {
+    const allEvents = await this.eventsRepository.find({ where: { user_id } });
+
+    return allEvents;
+  }
+
   async findByName({ filterBy, user_id }: IEventFind): Promise<Event> {
     const foundEvent = await this.eventsRepository.findOne({
       where: { name: filterBy, user_id },

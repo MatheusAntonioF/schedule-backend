@@ -11,5 +11,6 @@ const eventsController = new EventsController();
 eventRouter.use(ensureAuthenticate);
 
 eventRouter.post('/', eventsController.create);
+eventRouter.get('/', eventsController.list);
 
 export { eventRouter };
