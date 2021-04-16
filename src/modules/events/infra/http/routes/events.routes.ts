@@ -14,5 +14,6 @@ eventRouter.post('/', eventsController.create);
 eventRouter.get('/', eventsController.list);
 eventRouter.get('/:id', eventsController.show);
 eventRouter.delete('/:id', eventsController.delete);
+eventRouter.put('/:id', eventsController.update);
 
 export { eventRouter };

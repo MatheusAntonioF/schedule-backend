@@ -8,4 +8,8 @@ export interface IEventsRepository {
   findById(event_id: string): Promise<Event | null>;
   findAll(user_id: string): Promise<Event[]>;
   delete(event_id: string): Promise<boolean>;
+  update(
+    event_id: string,
+    eventInput: Omit<Partial<IEventCreate>, 'user_id'>
+  ): Promise<Event>;
 }
