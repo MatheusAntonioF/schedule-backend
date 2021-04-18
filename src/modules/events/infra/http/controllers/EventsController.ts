@@ -19,11 +19,13 @@ class EventsController {
   }
 
   async list(request: Request, response: Response): Promise<Response> {
+    const { tag_id, start_date, end_date } = request.query;
+
     const { id: user_id } = request.user;
 
     const allEvents = await container
       .resolve(ListEventsUseCase)
-      .execute(user_id);
+      .execute({ user_id, tag_id, start_date, end_date });
 
     return response.status(200).json(allEvents);
   }

@@ -34,6 +34,7 @@ class Event {
   @ManyToMany(() => Tag, tag => tag.events, { cascade: true, eager: true })
   @JoinTable({
     name: 'events_tags',
+    database: 'events_tags',
     joinColumn: { name: 'event_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'id' },
   })

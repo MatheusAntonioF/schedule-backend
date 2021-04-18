@@ -10,6 +10,8 @@ const ormConfig = {
   entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
   migrations: ['./src/shared/database/typeorm/migrations/*.ts'],
 
+  logging: true,
+
   cli: {
     migrationsDir: './src/shared/database/typeorm/migrations',
     entitiesDir: './src/modules/**/infra/typeorm/entities',
