@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -24,6 +25,12 @@ class Tag {
   colorHex: string;
 
   @ManyToMany(() => Event, event => event.tags)
+  @JoinTable({
+    name: 'events_tags',
+    database: 'events_tags',
+    joinColumn: { name: 'tag_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'event_id', referencedColumnName: 'id' },
+  })
   events: Event[];
 
   @Column()

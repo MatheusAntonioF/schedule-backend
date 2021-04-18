@@ -1,16 +1,41 @@
-import { getRepository, Repository } from 'typeorm';
+import { FindConditions, getRepository, Repository } from 'typeorm';
 
 import { IEventCreate } from '@modules/events/dtos/IEventCreate';
 import { IEventFind } from '@modules/events/dtos/IEventFind';
 import { IEventsRepository } from '@modules/events/interfaces/IEventsRepository';
+import { Tag } from '@modules/tags/infra/typeorm/entities/Tag';
 
 import { Event } from '../entities/Event';
 
 class EventsRepository implements IEventsRepository {
   private eventsRepository: Repository<Event>;
+  private tagsRepository: Repository<Tag>;
 
   constructor() {
     this.eventsRepository = getRepository(Event);
+    this.tagsRepository = getRepository(Tag);
+  }
+  async findByGenericFilters(wheres: FindConditions<Event>): Promise<Event[]> {
+    const allEvents = await this.eventsRepository.find({
+      where: wheres,
+    });
+
+    return allEvents;
+  }
+
+  async filterEventsByTagId(tag_id: string): Promise<Event[]> {
+    const foundEventsByTag = await this.eventsRepository
+      .createQueryBuilder('event')
+      .leftJoinAndSelect('event.tags', 'tag')
+      .where('tag.id = :tag_id', { tag_id })
+      .getMany();
+
+    this.eventsRepository
+      .createQueryBuilder('event')
+      .leftJoinAndSelect('event.tags', 'tag', 'tag.id = :tag_id', { tag_id })
+      .getMany();
+
+    return foundEventsByTag;
   }
 
   async findById(event_id: string): Promise<Event> {
@@ -20,7 +45,13 @@ class EventsRepository implements IEventsRepository {
   }
 
   async findAll(user_id: string): Promise<Event[]> {
-    const allEvents = await this.eventsRepository.find({ where: { user_id } });
+    const allEvents = await this.eventsRepository.find({
+      where: [
+        {
+          user_id,
+        },
+      ],
+    });
 
     return allEvents;
   }

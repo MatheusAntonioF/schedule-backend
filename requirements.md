@@ -24,6 +24,8 @@
 - [x] It should be able to delete an event
 - [x] It should be able to show a event
 - [x] It should be able to list event from an user
+- [x] It should be able to filter events by tag
+- [x] It should be able to filter events between two dates
 
 ### Non functional requirements
 

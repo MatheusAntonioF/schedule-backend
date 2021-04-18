@@ -1,3 +1,5 @@
+import { FindConditions } from 'typeorm';
+
 import { IEventCreate } from '../dtos/IEventCreate';
 import { IEventFind } from '../dtos/IEventFind';
 import { Event } from '../infra/typeorm/entities/Event';
@@ -6,6 +8,8 @@ export interface IEventsRepository {
   create(eventInput: IEventCreate): Promise<Event>;
   findByName(findEventInput: IEventFind): Promise<Event | null>;
   findById(event_id: string): Promise<Event | null>;
+  filterEventsByTagId(tag_id: string): Promise<Event[]>;
+  findByGenericFilters(filterBy: FindConditions<Event>): Promise<Event[]>;
   findAll(user_id: string): Promise<Event[]>;
   delete(event_id: string): Promise<boolean>;
   update(
