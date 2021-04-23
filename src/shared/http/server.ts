@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 
 import 'reflect-metadata';
@@ -13,7 +14,7 @@ import '@shared/container';
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 app.use(rootRouter);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
