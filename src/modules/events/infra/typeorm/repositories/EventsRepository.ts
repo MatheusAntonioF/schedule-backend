@@ -3,17 +3,14 @@ import { FindConditions, getRepository, Repository } from 'typeorm';
 import { IEventCreate } from '@modules/events/dtos/IEventCreate';
 import { IEventFind } from '@modules/events/dtos/IEventFind';
 import { IEventsRepository } from '@modules/events/interfaces/IEventsRepository';
-import { Tag } from '@modules/tags/infra/typeorm/entities/Tag';
 
 import { Event } from '../entities/Event';
 
 class EventsRepository implements IEventsRepository {
   private eventsRepository: Repository<Event>;
-  private tagsRepository: Repository<Tag>;
 
   constructor() {
     this.eventsRepository = getRepository(Event);
-    this.tagsRepository = getRepository(Tag);
   }
   async findByGenericFilters(wheres: FindConditions<Event>): Promise<Event[]> {
     const allEvents = await this.eventsRepository.find({
