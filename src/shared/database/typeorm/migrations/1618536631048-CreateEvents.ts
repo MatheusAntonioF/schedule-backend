@@ -26,7 +26,7 @@ export class CreateEvents1618536631048 implements MigrationInterface {
       },
       {
         name: 'date',
-        type: 'timestamp',
+        type: 'timestamp with time zone',
       },
       {
         name: 'user_id',

@@ -1,3 +1,4 @@
+import { endOfDay, startOfDay } from 'date-fns';
 import { inject, injectable } from 'tsyringe';
 import { Between, FindConditions } from 'typeorm';
 
@@ -45,7 +46,11 @@ class ListEventsUseCase {
 
     if (user_id) wheres.user_id = user_id;
 
-    if (start_date && end_date) wheres.date = Between(start_date, end_date);
+    if (start_date && end_date)
+      wheres.date = Between(
+        startOfDay(new Date(String(start_date))),
+        endOfDay(new Date(String(end_date)))
+      );
 
     return wheres;
   }

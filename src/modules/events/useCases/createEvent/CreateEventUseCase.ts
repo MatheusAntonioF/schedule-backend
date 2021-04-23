@@ -45,10 +45,6 @@ class CreateEventUseCase {
       tag_name => !tagsNamesExists.includes(tag_name)
     );
 
-    console.log(tagsNamesExists);
-
-    console.log(tagsNamesThatDontExists);
-
     const newTags: Tag[] = [];
 
     const DEFAULT_COLOR_HEX = '#7159c1';
