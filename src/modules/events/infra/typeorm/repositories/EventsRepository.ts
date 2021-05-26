@@ -83,13 +83,13 @@ class EventsRepository implements IEventsRepository {
 
   async update(
     event_id: string,
-    { name, description, date }: Omit<Partial<IEventCreate>, 'user_id'>
+    dataToUpdate: Omit<Partial<IEventCreate>, 'user_id'>
   ): Promise<Event> {
     const foundEvent = await this.eventsRepository.findOne(event_id);
 
     const updatedEvent = {} as Event;
 
-    Object.assign(updatedEvent, foundEvent, { name, description, date });
+    Object.assign(updatedEvent, foundEvent, dataToUpdate);
 
     await this.eventsRepository.save(updatedEvent);
 

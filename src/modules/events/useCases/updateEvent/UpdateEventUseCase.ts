@@ -27,13 +27,18 @@ class UpdateEventUseCase {
 
     if (!eventDoesntExists) throw new AppError('Event doesnt exists', 404);
 
-    const updatedEvent = await this.eventsRepository.update(event_id, {
-      name,
-      description,
-      date,
-    });
+    const parsedDataToUpdate = {};
 
-    console.log(updatedEvent);
+    Object.entries({ name, description, date })
+      .filter(([_, value]) => value)
+      .forEach(([key, value]) => {
+        parsedDataToUpdate[key] = value;
+      });
+
+    const updatedEvent = await this.eventsRepository.update(
+      event_id,
+      parsedDataToUpdate
+    );
 
     return updatedEvent;
   }
