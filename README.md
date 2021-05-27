@@ -16,7 +16,7 @@ This api serves for manage appointments and manage schedules. The appointments a
 - [x] Clean Code.
 - [x] Docker and docker-compose.
 - [x] Authentication using JWT.
-- [ ] Refresh Token.
+- [x] Refresh Token.
 - [ ] CI/CD.
 - [ ] Deploy using AWS.
 

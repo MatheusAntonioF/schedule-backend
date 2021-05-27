@@ -7,11 +7,11 @@ class SessionController {
   async signIn(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
-    const { user_id, token } = await container
+    const sessionCredentials = await container
       .resolve(SignInSessionUseCase)
       .execute({ email, password });
 
-    return response.status(200).json({ user_id, token });
+    return response.status(200).json(sessionCredentials);
   }
 }
 

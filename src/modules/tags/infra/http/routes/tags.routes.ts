@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { ensureAuthenticate } from '@modules/users/infra/http/middlewares/ensureAuthenticate';
+import { ensureAuthenticate } from '@shared/http/middlewares/ensureAuthenticate';
 
 import { TagsController } from '../controllers/TagsController';
 
